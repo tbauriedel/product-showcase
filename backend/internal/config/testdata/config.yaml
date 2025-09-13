@@ -1,0 +1,2 @@
+listener: ":1234"
+log_level: "debug"
