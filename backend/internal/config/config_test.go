@@ -7,7 +7,7 @@ import (
 
 // Read valid config file
 func TestNewFromFile(t *testing.T) {
-	c, err := NewFromFile("./testdata/config.yaml")
+	c, err := NewFromFile("../../testdata/config-mysql.yaml")
 
 	if err != nil {
 		t.Fatalf("Error loading config: %s", err.Error())
@@ -19,16 +19,16 @@ func TestNewFromFile(t *testing.T) {
 }
 
 // Non-existing file provided
-func TestFromFile_NotExisting(t *testing.T) {
-	_, err := NewFromFile("./testdata/not-existing.yaml")
+func TestNewFromFile_NotExisting(t *testing.T) {
+	_, err := NewFromFile("../../testdata/not-existing.yaml")
 	if err == nil {
 		t.Fatal("Expected error while providing non-existing file, got nil")
 	}
 }
 
 // Invalid YAML file provided
-func TestFromFile_InvalidYAML(t *testing.T) {
-	_, err := NewFromFile("./testdata/invalid-yaml.yaml")
+func TestNewFromFile_InvalidYAML(t *testing.T) {
+	_, err := NewFromFile("../../testdata/invalid-yaml.yaml")
 	if err == nil {
 		t.Fatal("Expected error while providing invalid YAML, got nil")
 	}
@@ -41,7 +41,7 @@ func TestGetLogLevel(t *testing.T) {
 		"info":    slog.LevelInfo,
 		"warn":    slog.LevelWarn,
 		"error":   slog.LevelError,
-		"default": slog.LevelInfo, // default of case is info
+		"default": slog.LevelInfo, // default is info
 	}
 
 	for x, y := range types {

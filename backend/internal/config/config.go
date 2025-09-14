@@ -24,7 +24,7 @@ type Database struct {
 	Address string `yaml:"address,omitempty"`
 	Port    int    `yaml:"port,omitempty"`
 	User    string `yaml:"user,omitempty"`
-	Pass    string `yaml:"pass,omitempty"`
+	Pass    string `yaml:"password,omitempty"`
 	DbName  string `yaml:"name,omitempty"`
 }
 

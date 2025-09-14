@@ -2,7 +2,7 @@ listener: ":1234"
 log_level: "debug"
 database:
   type: "mysql"
-  host: "localhost"
+  address: "localhost"
   port: "3306"
   user: "admin"
   password: "admin"

@@ -40,6 +40,8 @@ func main() {
 	// Setup logger
 	logger := slog.New(slog.NewTextHandler(os.Stdout, &slog.HandlerOptions{Level: cfg.GetLogLevel()}))
 
+	logger.Info("Starting product-showcase", "version", version.Version)
+
 	// Setup context with signal handling
 	ctx, cancel := signal.NotifyContext(context.Background(), syscall.SIGINT, syscall.SIGTERM)
 	defer cancel()
@@ -47,6 +49,8 @@ func main() {
 	var db database.Database
 
 	switch cfg.Database.Type {
+	case "sqlite3":
+		db = database.NewSQLiteDatabase(cfg, logger)
 	case "mysql":
 		db = database.NewMySQLDatabase(cfg, logger)
 	default:
@@ -65,4 +69,6 @@ func main() {
 	} else {
 		logger.Info("Listener finished")
 	}
+
+	logger.Info("Shutdown complete")
 }
