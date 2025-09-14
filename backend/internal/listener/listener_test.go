@@ -9,8 +9,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/tbauriedel/your-supply/internal/config"
-	"github.com/tbauriedel/your-supply/internal/database"
+	"github.com/tbauriedel/product-showcase/internal/config"
+	"github.com/tbauriedel/product-showcase/internal/database"
 )
 
 func TestNew(t *testing.T) {

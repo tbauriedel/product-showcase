@@ -11,9 +11,9 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/tbauriedel/your-supply/internal/config"
-	"github.com/tbauriedel/your-supply/internal/database"
-	"github.com/tbauriedel/your-supply/internal/version"
+	"github.com/tbauriedel/product-showcase/internal/config"
+	"github.com/tbauriedel/product-showcase/internal/database"
+	"github.com/tbauriedel/product-showcase/internal/version"
 )
 
 type Listener struct {

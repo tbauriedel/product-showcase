@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"log/slog"
 
-	"github.com/tbauriedel/your-supply/internal/config"
+	"github.com/tbauriedel/product-showcase/internal/config"
 )
 
 type MySQLDatabase struct {

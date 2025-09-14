@@ -1,4 +1,4 @@
-module github.com/tbauriedel/your-supply
+module github.com/tbauriedel/product-showcase
 
 go 1.24.5
 
