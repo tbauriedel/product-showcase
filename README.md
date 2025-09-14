@@ -1,7 +1,13 @@
 # Product-Showcase
 
-Application to document your stock and allow friends to place orders.
+## Disclaimer
 
-## Idea
-The idea is not a shop in the traditional sense.  
-Product-Showcase is meant to give you the ability to manage and document your inventory. Friends or acquaintances can view it and place "orders". Additionally, users can subscribe to a newsletter to be notified about new items.
+This repository is intended solely for learning and reference purposes.  
+The included code is not meant for production use and is provided without any warranty of correctness, completeness, or fitness for a particular purpose.  
+Use and copy at your own risk.
+
+## Documentation
+Early development. Will be created soon.
+
+## LICENSE
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
