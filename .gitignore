@@ -1,1 +1,5 @@
 .env
+/backend/coverage.html
+/backend/coverage.out
+/backend/product-showcase
+/sqlite.db

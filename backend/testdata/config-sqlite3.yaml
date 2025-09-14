@@ -1,0 +1,5 @@
+listener: ":1234"
+log_level: "debug"
+database:
+  type: "sqlite3"
+  address: "../sqlite.db"
