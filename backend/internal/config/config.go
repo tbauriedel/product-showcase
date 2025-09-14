@@ -14,8 +14,18 @@ const (
 )
 
 type Config struct {
-	LogLevel   string `yaml:"log_level,omitempty"`
-	ListenAddr string `yaml:"listener,omitempty"`
+	LogLevel   string   `yaml:"log_level,omitempty"`
+	ListenAddr string   `yaml:"listener,omitempty"`
+	Database   Database `yaml:"database,omitempty"`
+}
+
+type Database struct {
+	Type    string `yaml:"type,omitempty"`
+	Address string `yaml:"address,omitempty"`
+	Port    int    `yaml:"port,omitempty"`
+	User    string `yaml:"user,omitempty"`
+	Pass    string `yaml:"pass,omitempty"`
+	DbName  string `yaml:"name,omitempty"`
 }
 
 // NewFromFile reads the configuration from a YAML file and returns a Config instance.

@@ -3,7 +3,7 @@
 all: build lint test coverage
 
 build:
-	go build cmd/your-supply/main.go
+	go build cmd/your-supply/your-supply.go
 lint:
 	go fmt ./...
 test:

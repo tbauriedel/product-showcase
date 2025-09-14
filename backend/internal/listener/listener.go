@@ -12,19 +12,23 @@ import (
 	"time"
 
 	"github.com/tbauriedel/your-supply/internal/config"
+	"github.com/tbauriedel/your-supply/internal/database"
+	"github.com/tbauriedel/your-supply/internal/version"
 )
 
 type Listener struct {
 	config config.Config
 	mux    http.Handler
 	logger *slog.Logger
+	DB     database.Database
 }
 
 // New creates a new Listener instance with the provided configuration and logger.
-func New(config config.Config, logger *slog.Logger) *Listener {
+func New(config config.Config, logger *slog.Logger, db database.Database) *Listener {
 	l := &Listener{
 		config: config,
 		logger: logger,
+		DB:     db,
 	}
 
 	mux := http.NewServeMux()
@@ -75,12 +79,18 @@ func (l *Listener) Run(ctx context.Context) error {
 }
 
 // handleHealth responds with a simple health check message.
-func (l *Listener) handleHealth(w http.ResponseWriter, _ *http.Request) {
-	// TODO: Test database connection
-	dbState := "ok"
-	version := "0.0.0"
+func (l *Listener) handleHealth(w http.ResponseWriter, r *http.Request) {
+	ctx, cancel := context.WithTimeout(r.Context(), 2*time.Second)
+	defer cancel()
 
-	msg := fmt.Sprintf(`{"database": "%s", "version": "%s"}`, dbState, version)
+	dbState := "ok"
+	err := l.DB.CheckStatus(ctx)
+
+	if err != nil {
+		dbState = err.Error()
+	}
+
+	msg := fmt.Sprintf(`{"database": "%s", "version": "%s"}`, dbState, version.Version)
 
 	w.WriteHeader(http.StatusOK)
 

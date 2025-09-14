@@ -2,20 +2,25 @@ package listener
 
 import (
 	"context"
-	"github.com/tbauriedel/your-supply/internal/config"
 	"log/slog"
 	"net/http"
 	"net/http/httptest"
 	"os"
 	"testing"
 	"time"
+
+	"github.com/tbauriedel/your-supply/internal/config"
+	"github.com/tbauriedel/your-supply/internal/database"
 )
 
 func TestNew(t *testing.T) {
 	cfg := config.Config{ListenAddr: ":1234"}
 	logger := slog.New(slog.NewTextHandler(os.Stdout, nil))
 
-	l := New(cfg, logger)
+	var db database.Database
+	db = database.NewMySQLDatabase(cfg, logger)
+
+	l := New(cfg, logger, db)
 
 	if l.config.ListenAddr != ":1234" {
 		t.Fatalf("Actual: %s, Expected: %s", l.config.ListenAddr, ":1234")
@@ -30,7 +35,10 @@ func TestRun(t *testing.T) {
 	cfg := config.Config{ListenAddr: ":1234"}
 	logger := slog.New(slog.NewTextHandler(os.Stdout, nil))
 
-	l := New(cfg, logger)
+	var db database.Database
+	db = database.NewMySQLDatabase(cfg, logger)
+
+	l := New(cfg, logger, db)
 
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
@@ -52,7 +60,10 @@ func TestHandleHealth(t *testing.T) {
 	cfg := config.Config{ListenAddr: ":1234"}
 	logger := slog.New(slog.NewTextHandler(os.Stdout, nil))
 
-	l := New(cfg, logger)
+	var db database.Database
+	db = database.NewMySQLDatabase(cfg, logger)
+
+	l := New(cfg, logger, db)
 
 	req := httptest.NewRequest(http.MethodGet, "/-/health", nil)
 	w := httptest.NewRecorder()
